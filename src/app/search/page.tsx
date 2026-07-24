@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "搜索 - 转运公司 / 电话套餐 / 优惠码",
-  description: "在华点全站搜索中德转运公司、德国电话套餐与优惠码。",
+  description: "在华德福全站搜索中德转运公司、德国电话套餐与优惠码。",
 };
 
 export const dynamic = "force-dynamic";

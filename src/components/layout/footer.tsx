@@ -6,7 +6,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
-            <div className="mb-2 text-lg font-bold text-red-600">华点</div>
+            <div className="mb-2 text-lg font-bold text-red-600">华德福</div>
             <p className="text-sm text-gray-500">
               面向在德华人的本地化生活信息聚合与点评平台。
             </p>
@@ -36,7 +36,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-gray-200 pt-6 text-center text-xs text-gray-500">
-          © {new Date().getFullYear()} 华点 HuaDian. 仅供信息聚合参考，不构成消费建议。
+          © {new Date().getFullYear()} 华德福 HuaDeFu. 仅供信息聚合参考，不构成消费建议。
         </div>
       </div>
     </footer>

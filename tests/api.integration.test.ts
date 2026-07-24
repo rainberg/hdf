@@ -79,7 +79,7 @@ testSuite("API 集成测试（PostgreSQL）", () => {
     const userPwd = await bcrypt.hash("user12345", 10);
     const user = await testPrisma.user.create({
       data: {
-        email: "test-user@huadian.dev",
+        email: "test-user@huadefu.org",
         passwordHash: userPwd,
         nickname: "测试用户",
         role: "USER",

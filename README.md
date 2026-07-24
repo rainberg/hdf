@@ -1,4 +1,4 @@
-# 华点 HuaDian — 在德华人生活指南
+# 华德福 HuaDeFu — 在德华人生活指南
 
 > 面向在德华人的一站式生活信息聚合与点评平台：中德转运公司报价与评价、邀请码/打折码分享、德国电话套餐比价。
 
@@ -94,7 +94,7 @@ npm run dev
 
 | 角色 | 邮箱 | 密码 | 可访问 |
 | --- | --- | --- | --- |
-| 管理员 | admin@huadian.dev | admin123 | /admin |
+| 管理员 | admin@huadefu.org | admin123 | /admin |
 | 普通用户 | alice@example.com | user12345 | 发布评价/优惠码 |
 | 普通用户 | bob@example.com | user12345 | 发布评价/优惠码 |
 | 商家 | merchant@goeast.example | user12345 | /merchant |
@@ -135,7 +135,7 @@ TEST_DATABASE_URL="postgresql://..." npm run test
 ## 📁 项目结构
 
 ```
-huadian/
+huadefu/
 ├── prisma/
 │   ├── schema.prisma        # 数据库 schema
 │   ├── migrations/          # 迁移文件

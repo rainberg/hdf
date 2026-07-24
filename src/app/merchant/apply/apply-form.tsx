@@ -113,7 +113,7 @@ export function MerchantApplyForm({
                   onChange={(e) =>
                     setForm({ ...form, businessName: e.target.value })
                   }
-                  placeholder="如：华点物流 GmbH"
+                  placeholder="如：华德福物流 GmbH"
                 />
               </div>
               <div className="space-y-1.5">

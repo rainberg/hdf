@@ -1,4 +1,4 @@
-// 华点 (HuaDian) - 在德华人生活服务平台
+// 华德福 (HuaDeFu) - 在德华人生活服务平台
 // Prisma Schema
 // 使用 PostgreSQL（Vercel 部署友好；本地开发可用 Neon/Vercel Postgres 远程连接串）。
 // JSON 字段（origins/destinations/serviceTypes/dimensions/images）保持 String 存储，

@@ -19,7 +19,7 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "华点 - 在德华人生活指南 | 转运点评 · 优惠码 · 电话套餐",
+  title: "华德福 - 在德华人生活指南 | 转运点评 · 优惠码 · 电话套餐",
   description:
     "面向在德华人的本地化生活信息聚合平台：中德转运公司报价与真实评价、邀请码/打折码分享、德国电话套餐比价。",
 };

@@ -18,7 +18,7 @@ export default async function RegisterPage() {
   return (
     <div className="mx-auto flex max-w-md flex-col px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold text-gray-900">注册华点</h1>
+        <h1 className="text-2xl font-bold text-gray-900">注册华德福</h1>
         <p className="mt-1 text-sm text-gray-500">
           创建账号，加入在德华人生活社区。
         </p>

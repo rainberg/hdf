@@ -1,6 +1,6 @@
 # 部署指南
 
-本文档描述华点（HuaDian）项目从开发到生产的完整部署流程。
+本文档描述华德福（HuaDeFu）项目从开发到生产的完整部署流程。
 
 ## 1. 环境要求
 
@@ -21,9 +21,9 @@ cp .env.example .env
 
 | 变量 | 说明 | 必填 |
 | --- | --- | --- |
-| `DATABASE_URL` | PostgreSQL 连接串，如 `postgresql://user:pass@host:5432/huadian?schema=public` | ✅ |
+| `DATABASE_URL` | PostgreSQL 连接串，如 `postgresql://user:pass@host:5432/huadefu?schema=public` | ✅ |
 | `AUTH_SECRET` | NextAuth JWT 签名密钥，用 `openssl rand -base64 32` 生成 | ✅ |
-| `NEXT_PUBLIC_SITE_URL` | 站点完整 URL，如 `https://huadian.example.com` | ✅ |
+| `NEXT_PUBLIC_SITE_URL` | 站点完整 URL，如 `https://huadefu.org` | ✅ |
 | `AUTH_TRUST_HOST` | 反向代理后启用，设为 `true` | 生产必填 |
 | `TEST_DATABASE_URL` | 集成测试专用独立空库连接串，留空则跳过集成测试 | 可选 |
 | `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google 登录凭证 | 可选 |
@@ -46,13 +46,13 @@ npm run dev                          # 启动开发服务器 http://localhost:30
 
 | 角色 | 邮箱 | 密码 |
 | --- | --- | --- |
-| 管理员 | admin@huadian.dev | admin123 |
+| 管理员 | admin@huadefu.org | admin123 |
 | 普通用户 | alice@example.com | user12345 |
 | 普通用户 | bob@example.com | user12345 |
 | 商家 | merchant@goeast.example | user12345 |
 
-> 也可用本地自建 PostgreSQL（如 Docker：`docker run -d -p 5432:5432 -e POSTGRES_DB=huadian -e POSTGRES_PASSWORD=pg postgres:16-alpine`），
-> 连接串填 `postgresql://postgres:pg@localhost:5432/huadian?schema=public`。
+> 也可用本地自建 PostgreSQL（如 Docker：`docker run -d -p 5432:5432 -e POSTGRES_DB=huadefu -e POSTGRES_PASSWORD=pg postgres:16-alpine`），
+> 连接串填 `postgresql://postgres:pg@localhost:5432/huadefu?schema=public`。
 
 ## 4. 生产构建
 
@@ -139,8 +139,8 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: huadian
-      POSTGRES_USER: huadian
+      POSTGRES_DB: huadefu
+      POSTGRES_USER: huadefu
       POSTGRES_PASSWORD: change-me
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -150,9 +150,9 @@ services:
   web:
     build: .
     environment:
-      DATABASE_URL: postgresql://huadian:change-me@db:5432/huadian
+      DATABASE_URL: postgresql://huadefu:change-me@db:5432/huadefu
       AUTH_SECRET: ${AUTH_SECRET}
-      NEXT_PUBLIC_SITE_URL: https://huadian.example.com
+      NEXT_PUBLIC_SITE_URL: https://huadefu.org
       AUTH_TRUST_HOST: "true"
     depends_on:
       - db
@@ -176,7 +176,7 @@ docker compose exec web npm run seed
 ```nginx
 server {
     listen 80;
-    server_name huadian.example.com;
+    server_name huadefu.org;
 
     location / {
         proxy_pass http://127.0.0.1:3000;
@@ -194,7 +194,7 @@ server {
 启用 HTTPS：
 
 ```bash
-sudo certbot --nginx -d huadian.example.com
+sudo certbot --nginx -d huadefu.org
 ```
 
 ## 8. 性能优化建议
@@ -249,7 +249,7 @@ sudo certbot --nginx -d huadian.example.com
 
    **Linux crontab**：
    ```cron
-   0 3 * * * cd /app && npm run crawl:reviews >> /var/log/huadian-crawl.log 2>&1
+   0 3 * * * cd /app && npm run crawl:reviews >> /var/log/huadefu-crawl.log 2>&1
    ```
 
 ### 10.2 优惠码过期检查

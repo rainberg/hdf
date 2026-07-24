@@ -8,8 +8,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "华点 - 在德华人生活指南",
-    template: "%s | 华点",
+    default: "华德福 - 在德华人生活指南",
+    template: "%s | 华德福",
   },
   description:
     "面向在德华人的本地化生活信息聚合与点评平台：中德转运公司报价与评价、邀请码/打折码分享、电话合同套餐比价。",
@@ -29,22 +29,22 @@ export const metadata: Metadata = {
     "Vodafone",
     "O2",
   ],
-  authors: [{ name: "华点 HuaDian" }],
-  applicationName: "华点",
+  authors: [{ name: "华德福 HuaDeFu" }],
+  applicationName: "华德福",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "华点 - 在德华人生活指南",
+    title: "华德福 - 在德华人生活指南",
     description: "中德转运点评、优惠码分享、电话套餐比价",
     type: "website",
     locale: "zh_CN",
-    siteName: "华点",
+    siteName: "华德福",
     url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "华点 - 在德华人生活指南",
+    title: "华德福 - 在德华人生活指南",
     description: "中德转运点评、优惠码分享、电话套餐比价",
   },
   robots: {

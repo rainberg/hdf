@@ -43,7 +43,7 @@ async function main() {
 
   const admin = await prisma.user.create({
     data: {
-      email: "admin@huadian.dev",
+      email: "admin@huadefu.org",
       passwordHash: adminPassword,
       nickname: "运营小助手",
       role: "ADMIN",
@@ -584,7 +584,7 @@ async function main() {
   console.log("✅ 用户评价：7 条（含 1 条待审核）");
 
   console.log("\n🎉 种子数据写入完成！");
-  console.log("   管理员账号：admin@huadian.dev / admin123");
+  console.log("   管理员账号：admin@huadefu.org / admin123");
   console.log("   普通用户：alice@example.com / user12345");
   console.log("   普通用户：bob@example.com / user12345");
   console.log("   商家账号：merchant@goeast.example / user12345");

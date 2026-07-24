@@ -150,7 +150,7 @@ export function CompanyForm({ mode, companyId, initial }: CompanyFormProps) {
               required
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              placeholder="如：华点物流"
+              placeholder="如：华德福物流"
             />
           </div>
           <div className="space-y-1.5">
