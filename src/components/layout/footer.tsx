@@ -35,7 +35,10 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-8 border-t border-gray-200 pt-6 text-center text-xs text-gray-500">
+        <div className="mt-8 rounded-md bg-amber-50 px-4 py-3 text-center text-xs text-amber-700 ring-1 ring-amber-200">
+          ⚠️ 价格仅供参考，以官网为准。转运公司报价变动频繁，下单前请到官网核实最新费率。
+        </div>
+        <div className="mt-4 border-t border-gray-200 pt-6 text-center text-xs text-gray-500">
           © {new Date().getFullYear()} 华德福 HuaDeFu. 仅供信息聚合参考，不构成消费建议。
         </div>
       </div>
