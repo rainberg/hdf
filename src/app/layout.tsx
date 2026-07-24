@@ -1,0 +1,83 @@
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "华点 - 在德华人生活指南",
+    template: "%s | 华点",
+  },
+  description:
+    "面向在德华人的本地化生活信息聚合与点评平台：中德转运公司报价与评价、邀请码/打折码分享、电话合同套餐比价。",
+  keywords: [
+    "在德华人",
+    "中德转运",
+    "德国转运",
+    "中欧班列",
+    "德国电话卡",
+    "德国宽带",
+    "德国手机套餐",
+    "优惠码",
+    "打折码",
+    "邀请码",
+    "华人点评",
+    "Telekom",
+    "Vodafone",
+    "O2",
+  ],
+  authors: [{ name: "华点 HuaDian" }],
+  applicationName: "华点",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "华点 - 在德华人生活指南",
+    description: "中德转运点评、优惠码分享、电话套餐比价",
+    type: "website",
+    locale: "zh_CN",
+    siteName: "华点",
+    url: siteUrl,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "华点 - 在德华人生活指南",
+    description: "中德转运点评、优惠码分享、电话套餐比价",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  category: "生活服务",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#dc2626",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="zh-CN" className="h-full antialiased">
+      <body className="flex min-h-full flex-col">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}

@@ -1,0 +1,303 @@
+// 华点 (HuaDian) - 在德华人生活服务平台
+// Prisma Schema
+// 使用 PostgreSQL（Vercel 部署友好；本地开发可用 Neon/Vercel Postgres 远程连接串）。
+// JSON 字段（origins/destinations/serviceTypes/dimensions/images）保持 String 存储，
+// 以便 contains 模糊查询在 PG 上同样可用，前端 safeParseJson 解析逻辑无需改动。
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============ 枚举 ============
+
+enum UserRole {
+  USER
+  MERCHANT
+  ADMIN
+}
+
+enum ServiceType {
+  AIR
+  SEA
+  RAIL
+  SPECIAL
+}
+
+enum EntityType {
+  COMPANY
+  PHONE_PLAN
+}
+
+enum ReviewStatus {
+  PENDING
+  PUBLISHED
+  REJECTED
+}
+
+enum Sentiment {
+  POSITIVE
+  NEUTRAL
+  NEGATIVE
+}
+
+enum CodeType {
+  INVITE
+  DISCOUNT
+  REFERRAL
+}
+
+enum CodeStatus {
+  ACTIVE
+  EXPIRED
+  REMOVED
+}
+
+enum PlanType {
+  MOBILE
+  PREPAID
+  BROADBAND
+  BUNDLE
+}
+
+// ============ 用户 ============
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String?
+  nickname      String
+  avatar        String?
+  role          UserRole @default(USER)
+  creditScore   Int      @default(20)
+  emailVerified DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  lastLoginAt   DateTime?
+
+  reviews           Review[]
+  codes             Code[]
+  codeVotes         CodeVote[]
+  reviewVotes       ReviewVote[]
+  ownedCompanies    Company[]
+  merchantProfile   MerchantProfile?
+
+  @@index([email])
+}
+
+model MerchantProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName    String
+  businessLicense String?
+  contactEmail    String
+  contactPhone    String?
+  status          String   @default("PENDING") // PENDING / APPROVED / REJECTED
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ============ 转运公司 ============
+
+model Company {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  logo           String?
+  website        String?
+  intro          String?
+  foundedYear    Int?
+  phone          String?
+  wechat         String?
+  email          String?
+  // 起运地 / 目的地 / 服务类型：JSON 字符串存储，前端 safeParseJson 解析
+  origins        String   // e.g. '["上海","广州"]'
+  destinations   String   // e.g. '["法兰克福","柏林"]'
+  serviceTypes   String   // e.g. '["AIR","SEA"]'
+  verified       Boolean  @default(false)
+  ratingAvg      Float    @default(0)
+  reviewCount    Int      @default(0)
+  ownerUserId    String?  // 入驻商家
+  owner          User?    @relation(fields: [ownerUserId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  quotes             CompanyQuote[]
+  reviews            Review[]         @relation("CompanyReviews")
+  aggregatedReviews  AggregatedReview[]
+
+  @@index([slug])
+  @@index([verified])
+}
+
+model CompanyQuote {
+  id                   String      @id @default(cuid())
+  companyId            String
+  company              Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  channelName          String      // 渠道名，如「经济空运」
+  serviceType          ServiceType
+  origin               String
+  destination          String
+  firstWeightKg        Float
+  firstWeightPrice     Float
+  continueWeightKg     Float
+  continueWeightPrice  Float
+  estDaysMin           Int
+  estDaysMax           Int
+  restrictions         String?
+  active               Boolean     @default(true)
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+
+  @@index([companyId])
+  @@index([serviceType])
+}
+
+// ============ 评价 ============
+
+model Review {
+  id            String       @id @default(cuid())
+  entityType    EntityType
+  companyId     String?
+  company       Company?     @relation("CompanyReviews", fields: [companyId], references: [id], onDelete: Cascade)
+  phonePlanId   String?
+  phonePlan     PhonePlan?   @relation("PlanReviews", fields: [phonePlanId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // 总分（1-5）
+  overallRating Float
+  // 多维度评分 JSON：String 存储，前端 safeParseJson 解析
+  dimensions    String       // e.g. '{"price":4,"speed":5,"package":4,"service":3,"loss":5,"customs":4}'
+  content       String
+  images        String       // '[]' or '["url1","url2"]'
+  recommend     Boolean      @default(true)
+  scenario      String?
+  route         String?
+  weight        Float?
+  cost          Float?
+  likes         Int          @default(0)
+  reports       Int          @default(0)
+  status        ReviewStatus @default(PENDING)
+  merchantReply String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  votes ReviewVote[]
+
+  @@index([companyId])
+  @@index([phonePlanId])
+  @@index([userId])
+  @@index([status])
+}
+
+model ReviewVote {
+  id        String   @id @default(cuid())
+  reviewId  String
+  review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  value     Int      // +1 / -1
+  createdAt DateTime @default(now())
+
+  @@unique([reviewId, userId])
+}
+
+model AggregatedReview {
+  id          String    @id @default(cuid())
+  companyId   String
+  company     Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  source      String    // zhihu / xiaohongshu / tieba / weibo
+  title       String
+  summary     String
+  originalUrl String
+  publishedAt DateTime?
+  likes       Int       @default(0)
+  sentiment   Sentiment @default(NEUTRAL)
+  simhash     String?
+  createdAt   DateTime  @default(now())
+
+  @@index([companyId])
+  @@index([source])
+}
+
+// ============ 优惠码 ============
+
+model Code {
+  id                String     @id @default(cuid())
+  userId            String
+  user              User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type              CodeType
+  platform          String     // 平台名，如 "Amazon"
+  platformCategory  String     // ecommerce / streaming / tool / transport / telecom / other
+  benefitDescription String
+  codeValue         String?
+  link              String?
+  validFrom         DateTime?
+  validUntil        DateTime?
+  upvotes           Int        @default(0)
+  downvotes         Int        @default(0)
+  hasReferral       Boolean    @default(false) // 是否含返利
+  status            CodeStatus @default(ACTIVE)
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+
+  votes CodeVote[]
+
+  @@index([platformCategory])
+  @@index([status])
+  @@index([userId])
+}
+
+model CodeVote {
+  id        String   @id @default(cuid())
+  codeId    String
+  code      Code     @relation(fields: [codeId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  value     Int      // +1 可用 / -1 失效
+  createdAt DateTime @default(now())
+
+  @@unique([codeId, userId])
+}
+
+// ============ 电话套餐 ============
+
+model PhonePlan {
+  id             String   @id @default(cuid())
+  carrier        String   // Telekom / Vodafone / O2 / 1&1 / congstar ...
+  planName       String
+  slug           String   @unique
+  type           PlanType
+  monthlyFee     Float
+  dataGb         Int?     // null 表示无限
+  isUnlimited    Boolean  @default(false)
+  network        String   // "4G" / "5G"
+  contractMonths Int?     // null 表示无合约
+  promoPrice     Float?
+  promoMonths    Int?
+  restorePrice   Float?
+  officialUrl    String?
+  ratingAvg      Float    @default(0)
+  reviewCount    Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  reviews Review[] @relation("PlanReviews")
+
+  @@index([carrier])
+  @@index([type])
+}
+
+// ============ 分类（用于优惠码平台）============
+
+model Category {
+  id    String @id @default(cuid())
+  name  String
+  slug  String @unique
+  type  String // platform / category
+}
