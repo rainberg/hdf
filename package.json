@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "seed": "tsx prisma/seed.ts",
-    "crawl:reviews": "tsx scripts/crawl-reviews.ts"
+    "crawl:reviews": "tsx scripts/crawl-reviews.ts",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
