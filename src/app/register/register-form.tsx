@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, CheckCircle2 } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { registerSchema, type RegisterInput } from "@/lib/validations";
 import { Input, Label } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -18,10 +19,15 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-export function RegisterForm() {
+interface RegisterFormProps {
+  callbackUrl?: string;
+}
+
+export function RegisterForm({ callbackUrl = "/" }: RegisterFormProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [password, setPassword] = useState("");
 
   const {
     register,
@@ -34,8 +40,20 @@ export function RegisterForm() {
       nickname: "",
       password: "",
       confirmPassword: "",
+      agreeTerms: false,
     },
   });
+
+  // 密码强度计算
+  const strength = calcPasswordStrength(password);
+  const strengthLabel = ["太弱", "弱", "中", "强", "很强"][strength.score];
+  const strengthColor = [
+    "bg-gray-200",
+    "bg-red-400",
+    "bg-gold-400",
+    "bg-brand-400",
+    "bg-emerald-500",
+  ][strength.score];
 
   const onSubmit = async (data: RegisterInput) => {
     setError(null);
@@ -50,10 +68,22 @@ export function RegisterForm() {
         setError(json.error ?? "注册失败，请重试");
         return;
       }
-      setSuccess(true);
-      setTimeout(() => {
-        router.push("/login");
-      }, 1500);
+
+      // 注册成功后自动登录
+      const signInRes = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+        callbackUrl,
+      });
+      if (signInRes && !signInRes.error) {
+        setSuccess(true);
+        setTimeout(() => router.push(callbackUrl), 1000);
+      } else {
+        // 自动登录失败，退回到登录页
+        setSuccess(true);
+        setTimeout(() => router.push("/login"), 1500);
+      }
     } catch {
       setError("网络错误，请重试");
     }
@@ -61,12 +91,10 @@ export function RegisterForm() {
 
   if (success) {
     return (
-      <div className="rounded-xl border border-green-200 bg-green-50 p-8 text-center">
-        <CheckCircle2 className="mx-auto mb-3 text-green-500" size={48} />
-        <h3 className="text-lg font-semibold text-green-900">注册成功</h3>
-        <p className="mt-1 text-sm text-green-700">
-          即将跳转到登录页，请使用新账号登录…
-        </p>
+      <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-8 text-center">
+        <CheckCircle2 className="mx-auto mb-3 text-emerald-500" size={48} />
+        <h3 className="text-lg font-semibold text-emerald-900">注册成功</h3>
+        <p className="mt-1 text-sm text-emerald-700">即将跳转…</p>
       </div>
     );
   }
@@ -114,9 +142,26 @@ export function RegisterForm() {
               id="password"
               type="password"
               autoComplete="new-password"
-              placeholder="至少 8 位"
-              {...register("password")}
+              placeholder="至少 8 位，含字母和数字"
+              {...register("password", {
+                onChange: (e) => setPassword(e.target.value),
+              })}
             />
+            {password && (
+              <div className="flex items-center gap-2">
+                <div className="flex h-1.5 flex-1 gap-1">
+                  {[0, 1, 2, 3].map((i) => (
+                    <div
+                      key={i}
+                      className={`flex-1 rounded-full transition-colors ${
+                        i < strength.score ? strengthColor : "bg-gray-200"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="text-xs text-gray-500">{strengthLabel}</span>
+              </div>
+            )}
             {errors.password && (
               <p className="text-xs text-brand-500">
                 {errors.password.message}
@@ -139,6 +184,35 @@ export function RegisterForm() {
             )}
           </div>
 
+          <label className="flex items-start gap-2 text-sm text-gray-600">
+            <input
+              type="checkbox"
+              {...register("agreeTerms")}
+              className="mt-0.5 h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+            />
+            <span>
+              我已阅读并同意
+              <Link
+                href="/terms"
+                className="mx-1 text-brand-600 hover:underline"
+              >
+                服务条款
+              </Link>
+              与
+              <Link
+                href="/privacy"
+                className="ml-1 text-brand-600 hover:underline"
+              >
+                隐私政策
+              </Link>
+            </span>
+          </label>
+          {errors.agreeTerms && (
+            <p className="text-xs text-brand-500">
+              {errors.agreeTerms.message}
+            </p>
+          )}
+
           {error && (
             <div className="rounded-md bg-brand-50 p-3 text-sm text-brand-600">
               {error}
@@ -147,7 +221,7 @@ export function RegisterForm() {
 
           <Button type="submit" className="w-full" disabled={isSubmitting}>
             {isSubmitting && <Loader2 size={16} className="animate-spin" />}
-            注册
+            注册并登录
           </Button>
         </form>
       </CardContent>
@@ -164,4 +238,18 @@ export function RegisterForm() {
       </CardFooter>
     </Card>
   );
+}
+
+/**
+ * 密码强度评估，返回 0-4 的分数
+ */
+function calcPasswordStrength(pw: string): { score: number } {
+  let score = 0;
+  if (pw.length >= 8) score++;
+  if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
+  else if (/[a-zA-Z]/.test(pw)) score += 0;
+  if (/[0-9]/.test(pw)) score++;
+  if (/[^a-zA-Z0-9]/.test(pw)) score++;
+  if (pw.length >= 12) score = Math.min(4, score + 1);
+  return { score: Math.min(4, score) };
 }

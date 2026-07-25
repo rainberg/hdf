@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validations";
+import { createEmailVerificationToken } from "@/lib/tokens";
+import { sendEmailVerification } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -30,11 +32,21 @@ export async function POST(req: Request) {
         email: normalizedEmail,
         nickname,
         passwordHash,
-        // 开发环境自动验证邮箱；生产环境应发送验证邮件
+        // 开发环境自动验证邮箱；生产环境通过验证邮件
         emailVerified: process.env.NODE_ENV === "development" ? new Date() : null,
       },
       select: { id: true, email: true, nickname: true },
     });
+
+    // 生产环境发送验证邮件（降级模式静默处理）
+    if (process.env.NODE_ENV !== "development") {
+      try {
+        const token = await createEmailVerificationToken(user.id);
+        await sendEmailVerification(user.email, token);
+      } catch (e) {
+        console.error("[register] 发送验证邮件失败:", e);
+      }
+    }
 
     return NextResponse.json(
       { message: "注册成功，请登录", user },

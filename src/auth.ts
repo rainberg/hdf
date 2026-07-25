@@ -73,6 +73,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         });
         if (!user || !user.passwordHash) return null;
 
+        // 封禁用户禁止登录
+        if (user.status === "BANNED") {
+          throw new Error("您的账号已被封禁，如有疑问请联系管理员");
+        }
+
         const valid = await bcrypt.compare(password, user.passwordHash);
         if (!valid) return null;
 

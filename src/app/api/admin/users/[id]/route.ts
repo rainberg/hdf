@@ -6,7 +6,7 @@ import { z } from "zod";
 const updateSchema = z.object({
   role: z.enum(["USER", "MERCHANT", "ADMIN"]).optional(),
   creditScore: z.number().int().min(0).max(100).optional(),
-  // 软封禁：将 creditScore 置为 0 表示不可信，配合评价冷却实现"封禁"效果
+  status: z.enum(["ACTIVE", "BANNED"]).optional(),
 });
 
 type Params = { params: Promise<{ id: string }> };
@@ -42,6 +42,7 @@ export async function PATCH(req: NextRequest, { params }: Params) {
   if (parsed.data.role) data.role = parsed.data.role;
   if (parsed.data.creditScore !== undefined)
     data.creditScore = parsed.data.creditScore;
+  if (parsed.data.status) data.status = parsed.data.status;
 
   const updated = await prisma.user.update({
     where: { id },
@@ -52,6 +53,7 @@ export async function PATCH(req: NextRequest, { params }: Params) {
       nickname: true,
       role: true,
       creditScore: true,
+      status: true,
     },
   });
 

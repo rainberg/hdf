@@ -9,17 +9,23 @@ interface UserActionsProps {
   userId: string;
   currentRole: string;
   creditScore: number;
+  currentStatus: string;
 }
 
 export function UserActions({
   userId,
   currentRole,
   creditScore,
+  currentStatus,
 }: UserActionsProps) {
   const router = useRouter();
   const [acting, setActing] = useState<string | null>(null);
 
-  const update = async (data: { role?: string; creditScore?: number }) => {
+  const update = async (data: {
+    role?: string;
+    creditScore?: number;
+    status?: string;
+  }) => {
     setActing(JSON.stringify(data));
     try {
       const res = await fetch(`/api/admin/users/${userId}`, {
@@ -39,6 +45,8 @@ export function UserActions({
       setActing(null);
     }
   };
+
+  const isBanned = currentStatus === "BANNED";
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -81,21 +89,81 @@ export function UserActions({
           设为管理员
         </Button>
       )}
+
+      {/* 信用分微调 */}
       {creditScore > 0 && (
+        <>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => update({ creditScore: Math.max(0, creditScore - 10) })}
+            disabled={acting !== null || creditScore < 10}
+            title="信用分 -10"
+          >
+            {acting === `{"creditScore":${Math.max(0, creditScore - 10)}}` ? (
+              <Loader2 size={14} className="animate-spin" />
+            ) : null}
+            -10 信用
+          </Button>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => update({ creditScore: Math.min(100, creditScore + 10) })}
+            disabled={acting !== null || creditScore >= 100}
+            title="信用分 +10"
+          >
+            {acting === `{"creditScore":${Math.min(100, creditScore + 10)}}` ? (
+              <Loader2 size={14} className="animate-spin" />
+            ) : null}
+            +10 信用
+          </Button>
+          <Button
+            size="sm"
+            variant="danger"
+            onClick={() => {
+              if (confirm("确定要将信用分清零？该用户将被限制发布评价。")) {
+                update({ creditScore: 0 });
+              }
+            }}
+            disabled={acting !== null}
+          >
+            {acting === '{"creditScore":0}' ? (
+              <Loader2 size={14} className="animate-spin" />
+            ) : null}
+            清零信用
+          </Button>
+        </>
+      )}
+
+      {/* 封禁/启用 */}
+      {currentRole !== "ADMIN" && !isBanned && (
         <Button
           size="sm"
           variant="danger"
           onClick={() => {
-            if (confirm("确定要将信用分清零？该用户将被限制发布评价。")) {
-              update({ creditScore: 0 });
+            if (confirm("确定要封禁该用户？封禁后无法登录。")) {
+              update({ status: "BANNED" });
             }
           }}
           disabled={acting !== null}
         >
-          {acting === '{"creditScore":0}' ? (
+          {acting === '{"status":"BANNED"}' ? (
             <Loader2 size={14} className="animate-spin" />
           ) : null}
-          封禁(清零信用)
+          封禁
+        </Button>
+      )}
+      {isBanned && (
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => update({ status: "ACTIVE" })}
+          disabled={acting !== null}
+        >
+          {acting === '{"status":"ACTIVE"}' ? (
+            <Loader2 size={14} className="animate-spin" />
+          ) : null}
+          启用
         </Button>
       )}
     </div>

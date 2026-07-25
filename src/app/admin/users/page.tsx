@@ -43,6 +43,7 @@ export default async function AdminUsersPage({
         email: true,
         nickname: true,
         role: true,
+        status: true,
         creditScore: true,
         emailVerified: true,
         createdAt: true,
@@ -148,6 +149,11 @@ export default async function AdminUsersPage({
                             未验证邮箱
                           </Badge>
                         )}
+                        {u.status === "BANNED" && (
+                          <Badge variant="outline" className="text-red-600">
+                            已封禁
+                          </Badge>
+                        )}
                       </div>
                       <div className="mt-2 grid gap-2 text-sm text-gray-600 sm:grid-cols-2">
                         <div>
@@ -174,6 +180,7 @@ export default async function AdminUsersPage({
                         userId={u.id}
                         currentRole={u.role}
                         creditScore={u.creditScore}
+                        currentStatus={u.status}
                       />
                     </div>
                   </div>

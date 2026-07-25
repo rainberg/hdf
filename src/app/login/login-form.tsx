@@ -52,7 +52,7 @@ export function LoginForm({
         callbackUrl,
       });
       if (!res || res.error) {
-        setError("邮箱或密码错误，请重试");
+        setError("邮箱或密码错误，或账号已被封禁");
         return;
       }
       router.push(callbackUrl || "/");
@@ -112,6 +112,15 @@ export function LoginForm({
             {isSubmitting && <Loader2 size={16} className="animate-spin" />}
             登录
           </Button>
+
+          <div className="text-right">
+            <Link
+              href="/forgot-password"
+              className="text-xs text-gray-500 hover:text-brand-600"
+            >
+              忘记密码？
+            </Link>
+          </div>
         </form>
 
         {showSocial && (

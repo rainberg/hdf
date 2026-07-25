@@ -1,12 +1,23 @@
 import { z } from "zod";
 
+// 密码强度校验：至少 8 位，必须包含字母 + 数字
+export const passwordSchema = z
+  .string()
+  .min(8, "密码至少 8 位")
+  .max(72, "密码最多 72 位")
+  .regex(/[a-zA-Z]/, "密码必须包含字母")
+  .regex(/[0-9]/, "密码必须包含数字");
+
 // 用户注册
 export const registerSchema = z
   .object({
     email: z.string().email("请输入有效的邮箱地址"),
     nickname: z.string().min(2, "昵称至少 2 个字符").max(30, "昵称最多 30 个字符"),
-    password: z.string().min(8, "密码至少 8 位").max(72, "密码最多 72 位"),
+    password: passwordSchema,
     confirmPassword: z.string(),
+    agreeTerms: z.boolean().refine((v) => v === true, {
+      message: "请同意服务条款与隐私政策",
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "两次输入的密码不一致",
@@ -22,6 +33,54 @@ export const loginSchema = z.object({
 });
 
 export type LoginInput = z.infer<typeof loginSchema>;
+
+// 忘记密码（请求重置）
+export const forgotPasswordSchema = z.object({
+  email: z.string().email("请输入有效的邮箱地址"),
+});
+
+export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
+
+// 重置密码
+export const resetPasswordSchema = z
+  .object({
+    token: z.string().min(1, "缺少重置令牌"),
+    password: passwordSchema,
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "两次输入的密码不一致",
+    path: ["confirmPassword"],
+  });
+
+export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
+
+// 修改密码（已登录用户）
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, "请输入当前密码"),
+    newPassword: passwordSchema,
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "两次输入的新密码不一致",
+    path: ["confirmPassword"],
+  });
+
+export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
+
+// 编辑个人资料
+export const profileSchema = z.object({
+  nickname: z.string().min(2, "昵称至少 2 个字符").max(30, "昵称最多 30 个字符"),
+  avatar: z
+    .string()
+    .url("头像必须是合法 URL")
+    .optional()
+    .or(z.literal("")),
+  bio: z.string().max(200, "个人简介最多 200 字").optional().or(z.literal("")),
+});
+
+export type ProfileInput = z.infer<typeof profileSchema>;
 
 // 转运公司报价
 export const quoteSchema = z.object({

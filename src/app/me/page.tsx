@@ -4,7 +4,10 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { creditLevel, relativeTime } from "@/lib/utils";
+import { emailConfigured } from "@/lib/email";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ResendVerificationButton } from "@/components/me/resend-verification-button";
 
 export const metadata: Metadata = {
   title: "个人中心",
@@ -28,8 +31,11 @@ export default async function MePage() {
         email: true,
         nickname: true,
         avatar: true,
+        bio: true,
         creditScore: true,
         role: true,
+        status: true,
+        emailVerified: true,
         createdAt: true,
       },
     }),
@@ -58,7 +64,12 @@ export default async function MePage() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-      <h1 className="mb-6 text-2xl font-bold text-gray-900">个人中心</h1>
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-gray-900">个人中心</h1>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/me/edit">编辑资料</Link>
+        </Button>
+      </div>
 
       {/* 用户信息 */}
       <Card className="mb-8">
@@ -89,11 +100,33 @@ export default async function MePage() {
                     ? "商家"
                     : "普通用户"}
               </span>
+              {user.status === "BANNED" && (
+                <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-600">
+                  已封禁
+                </span>
+              )}
             </div>
             <p className="mt-1 text-sm text-gray-500">{user.email}</p>
-            <p className="mt-1 text-xs text-gray-400">
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+              {user.emailVerified ? (
+                <span className="inline-flex items-center gap-1 rounded bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700">
+                  ✓ 邮箱已验证
+                </span>
+              ) : (
+                <>
+                  <span className="inline-flex items-center gap-1 rounded bg-gold-50 px-2 py-0.5 text-xs text-gold-700">
+                    ⚠ 邮箱未验证
+                  </span>
+                  <ResendVerificationButton emailConfigured={emailConfigured} />
+                </>
+              )}
+            </div>
+            <p className="mt-2 text-xs text-gray-400">
               注册于 {relativeTime(user.createdAt)}
             </p>
+            {user.bio && (
+              <p className="mt-2 text-sm text-gray-600">{user.bio}</p>
+            )}
           </div>
           <div className="text-center sm:text-right">
             <p className="text-xs text-gray-500">信用分</p>

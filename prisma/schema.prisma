@@ -21,6 +21,11 @@ enum UserRole {
   ADMIN
 }
 
+enum UserStatus {
+  ACTIVE
+  BANNED
+}
+
 enum ServiceType {
   AIR
   SEA
@@ -67,16 +72,18 @@ enum PlanType {
 // ============ 用户 ============
 
 model User {
-  id            String   @id @default(cuid())
-  email         String   @unique
+  id            String       @id @default(cuid())
+  email         String       @unique
   passwordHash  String?
   nickname      String
   avatar        String?
-  role          UserRole @default(USER)
-  creditScore   Int      @default(20)
+  bio           String?
+  role          UserRole     @default(USER)
+  status        UserStatus   @default(ACTIVE)
+  creditScore   Int          @default(20)
   emailVerified DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   lastLoginAt   DateTime?
 
   reviews           Review[]
@@ -85,8 +92,37 @@ model User {
   reviewVotes       ReviewVote[]
   ownedCompanies    Company[]
   merchantProfile   MerchantProfile?
+  passwordResets    PasswordResetToken[]
+  emailVerifications EmailVerificationToken[]
 
   @@index([email])
+  @@index([status])
+}
+
+// 密码重置令牌（一次性，24h 过期）
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+// 邮箱验证令牌（一次性，48h 过期）
+model EmailVerificationToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
 }
 
 model MerchantProfile {

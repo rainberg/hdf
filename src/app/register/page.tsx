@@ -9,11 +9,22 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function RegisterPage() {
+interface SearchParams {
+  callbackUrl?: string;
+}
+
+export default async function RegisterPage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
   const session = await auth();
   if (session?.user) {
     redirect("/");
   }
+
+  const sp = await searchParams;
+  const callbackUrl = sp.callbackUrl || "/";
 
   return (
     <div className="mx-auto flex max-w-md flex-col px-4 py-12 sm:px-6 lg:px-8">
@@ -23,7 +34,7 @@ export default async function RegisterPage() {
           创建账号，加入在德华人生活社区。
         </p>
       </div>
-      <RegisterForm />
+      <RegisterForm callbackUrl={callbackUrl} />
     </div>
   );
 }
