@@ -56,7 +56,7 @@ export default async function ManageCompanyPage({ params }: Params) {
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
       <Link
         href="/merchant"
-        className="mb-4 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-red-600"
+        className="mb-4 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-brand-600"
       >
         <ArrowLeft size={14} />
         返回商家中心
@@ -141,7 +141,7 @@ export default async function ManageCompanyPage({ params }: Params) {
                     <Badge
                       variant={
                         r.status === "PUBLISHED"
-                          ? "red"
+                          ? "brand"
                           : r.status === "PENDING"
                             ? "outline"
                             : "outline"

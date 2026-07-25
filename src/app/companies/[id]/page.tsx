@@ -114,7 +114,7 @@ export default async function CompanyDetailPage({ params }: Params) {
       />
       {/* 面包屑 */}
       <nav className="mb-4 text-sm text-gray-500">
-        <Link href="/companies" className="hover:text-red-600">
+        <Link href="/companies" className="hover:text-brand-600">
           转运公司
         </Link>
         <span className="mx-2">/</span>
@@ -124,7 +124,7 @@ export default async function CompanyDetailPage({ params }: Params) {
       {/* 头部 */}
       <div className="rounded-xl border border-gray-200 bg-white p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-red-50 text-3xl font-bold text-red-600">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-3xl font-bold text-brand-600">
             {company.logo ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -160,7 +160,7 @@ export default async function CompanyDetailPage({ params }: Params) {
                   ({company.reviewCount} 条评价)
                 </span>
                 {sampleInsufficient && company.reviewCount > 0 && (
-                  <span className="text-xs text-amber-600">样本不足</span>
+                  <span className="text-xs text-gold-600">样本不足</span>
                 )}
               </div>
             </div>
@@ -169,7 +169,7 @@ export default async function CompanyDetailPage({ params }: Params) {
             )}
             <div className="mt-4 flex flex-wrap gap-2">
               {serviceTypes.map((t) => (
-                <Badge key={t} variant="red">
+                <Badge key={t} variant="brand">
                   {serviceTypeLabels[t] ?? t}
                 </Badge>
               ))}
@@ -309,7 +309,7 @@ export default async function CompanyDetailPage({ params }: Params) {
       )}
 
       {/* 免责声明 */}
-      <div className="mt-8 flex items-start gap-2 rounded-lg bg-amber-50 p-4 text-xs text-amber-700">
+      <div className="mt-8 flex items-start gap-2 rounded-lg bg-gold-50 p-4 text-xs text-gold-700">
         <AlertTriangle size={16} className="mt-0.5 shrink-0" />
         <p>
           本页信息（报价、评价等）由用户与商家共同维护，仅供参考。下单前请与商家核实最新价格与条款，本平台不承担任何交易纠纷责任。

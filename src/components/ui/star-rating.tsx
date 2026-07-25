@@ -44,7 +44,7 @@ export function StarRating({
                 >
                   <Star
                     size={size}
-                    className="text-amber-400"
+                    className="text-gold-400"
                     fill="currentColor"
                   />
                 </span>
@@ -93,7 +93,7 @@ export function StarInput({
           >
             <Star
               size={size}
-              className={active ? "text-amber-400" : "text-gray-300"}
+              className={active ? "text-gold-400" : "text-gray-300"}
               fill={active ? "currentColor" : "none"}
             />
           </button>

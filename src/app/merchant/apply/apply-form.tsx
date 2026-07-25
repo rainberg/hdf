@@ -60,7 +60,7 @@ export function MerchantApplyForm({
     return (
       <Card>
         <CardContent className="flex flex-col items-center gap-3 p-8 text-center">
-          <Clock className="text-amber-500" size={48} />
+          <Clock className="text-gold-500" size={48} />
           <h3 className="text-lg font-semibold text-gray-900">
             申请审核中
           </h3>
@@ -78,7 +78,7 @@ export function MerchantApplyForm({
   return (
     <>
       {rejected && (
-        <div className="mb-4 flex items-start gap-2 rounded-lg bg-red-50 p-4 text-sm text-red-700">
+        <div className="mb-4 flex items-start gap-2 rounded-lg bg-brand-50 p-4 text-sm text-brand-700">
           <AlertCircle size={16} className="mt-0.5 shrink-0" />
           <p>上次的申请未通过审核。请检查信息后重新提交。</p>
         </div>
@@ -104,7 +104,7 @@ export function MerchantApplyForm({
             <form onSubmit={onSubmit} className="space-y-4">
               <div className="space-y-1.5">
                 <Label htmlFor="businessName">
-                  商家/公司名称 <span className="text-red-500">*</span>
+                  商家/公司名称 <span className="text-brand-500">*</span>
                 </Label>
                 <Input
                   id="businessName"
@@ -129,7 +129,7 @@ export function MerchantApplyForm({
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="contactEmail">
-                  联系邮箱 <span className="text-red-500">*</span>
+                  联系邮箱 <span className="text-brand-500">*</span>
                 </Label>
                 <Input
                   id="contactEmail"
@@ -155,7 +155,7 @@ export function MerchantApplyForm({
               </div>
 
               {error && (
-                <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
+                <div className="rounded-md bg-brand-50 p-3 text-sm text-brand-600">
                   {error}
                 </div>
               )}

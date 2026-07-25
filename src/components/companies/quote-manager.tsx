@@ -119,7 +119,7 @@ export function QuoteManager({
                     <span className="font-medium text-gray-900">
                       {q.channelName}
                     </span>
-                    <Badge variant="red">
+                    <Badge variant="brand">
                       {serviceTypeLabels[q.serviceType] ?? q.serviceType}
                     </Badge>
                     {!q.active && <Badge variant="outline">已下架</Badge>}
@@ -145,7 +145,7 @@ export function QuoteManager({
                     type="button"
                     onClick={() => handleDelete(q.id)}
                     disabled={deleting === q.id}
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-md text-gray-500 hover:bg-red-50 hover:text-red-600 disabled:opacity-50"
+                    className="inline-flex h-8 w-8 items-center justify-center rounded-md text-gray-500 hover:bg-brand-50 hover:text-brand-600 disabled:opacity-50"
                     aria-label="删除"
                   >
                     <Trash2 size={14} />
@@ -164,7 +164,7 @@ export function QuoteManager({
               </div>
 
               {q.restrictions && (
-                <p className="mt-2 text-xs text-amber-600">
+                <p className="mt-2 text-xs text-gold-600">
                   限制：{q.restrictions}
                 </p>
               )}

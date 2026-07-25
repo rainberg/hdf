@@ -67,7 +67,7 @@ export default async function AdminDashboard() {
   ]);
 
   const stats = [
-    { label: "转运公司", value: companyCount, icon: Package, color: "text-red-600 bg-red-50" },
+    { label: "转运公司", value: companyCount, icon: Package, color: "text-brand-600 bg-brand-50" },
     { label: "电话套餐", value: planCount, icon: Smartphone, color: "text-blue-600 bg-blue-50" },
     { label: "优惠码", value: codeCount, icon: Ticket, color: "text-green-600 bg-green-50" },
     { label: "用户总数", value: userCount, icon: Users, color: "text-purple-600 bg-purple-50" },
@@ -162,7 +162,7 @@ export default async function AdminDashboard() {
                         ? "bg-green-50 text-green-600"
                         : r.status === "PENDING"
                           ? "bg-amber-50 text-amber-600"
-                          : "bg-red-50 text-red-600"
+                          : "bg-brand-50 text-brand-600"
                     }`}
                   >
                     {r.status === "PUBLISHED"

@@ -1,7 +1,23 @@
 import type { Metadata, Viewport } from "next";
+import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+
+// 精致字体组合：Fraunces 现代衬线（标题/数字）+ Manrope 几何无衬线（UI/正文）
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -61,7 +77,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#dc2626",
+  themeColor: "#1b3a5b",
   width: "device-width",
   initialScale: 1,
 };
@@ -72,7 +88,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className="h-full antialiased">
+    <html
+      lang="zh-CN"
+      className={`${fraunces.variable} ${manrope.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>

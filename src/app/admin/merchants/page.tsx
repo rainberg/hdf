@@ -55,7 +55,7 @@ export default async function AdminMerchantsPage({
             href={`/admin/merchants?status=${t.value}`}
             className={`flex-1 rounded-md px-3 py-1.5 text-center text-sm transition-colors ${
               status === t.value
-                ? "bg-red-600 text-white"
+                ? "bg-brand-600 text-white"
                 : "text-gray-600 hover:bg-gray-50"
             }`}
           >
@@ -84,7 +84,7 @@ export default async function AdminMerchantsPage({
                       <Badge
                         variant={
                           p.status === "APPROVED"
-                            ? "red"
+                            ? "brand"
                             : p.status === "PENDING"
                               ? "outline"
                               : "outline"

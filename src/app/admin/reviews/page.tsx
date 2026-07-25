@@ -55,7 +55,7 @@ export default async function AdminReviewsPage({
             href={`/admin/reviews?status=${t.value}`}
             className={`flex-1 rounded-md px-3 py-1.5 text-center text-sm transition-colors ${
               status === t.value
-                ? "bg-red-600 text-white"
+                ? "bg-brand-600 text-white"
                 : "text-gray-600 hover:bg-gray-50"
             }`}
           >
@@ -95,7 +95,7 @@ export default async function AdminReviewsPage({
                         <span className="text-xs text-gray-400">·</span>
                         <Link
                           href={targetHref}
-                          className="text-sm text-gray-600 hover:text-red-600"
+                          className="text-sm text-gray-600 hover:text-brand-600"
                         >
                           {targetName}
                         </Link>
@@ -103,7 +103,7 @@ export default async function AdminReviewsPage({
                         <Badge
                           variant={
                             r.status === "PUBLISHED"
-                              ? "red"
+                              ? "brand"
                               : r.status === "PENDING"
                                 ? "outline"
                                 : "outline"

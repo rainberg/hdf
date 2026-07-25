@@ -25,11 +25,11 @@ const serviceTypeLabels: Record<string, string> = {
   SPECIAL: "专线",
 };
 
-const serviceTypeVariants: Record<string, "red" | "blue" | "green" | "amber"> = {
+const serviceTypeVariants: Record<string, "brand" | "blue" | "green" | "amber"> = {
   AIR: "blue",
   SEA: "green",
   RAIL: "amber",
-  SPECIAL: "red",
+  SPECIAL: "brand",
 };
 
 export function QuoteTable({ quotes }: QuoteTableProps) {
@@ -70,7 +70,7 @@ export function QuoteTable({ quotes }: QuoteTableProps) {
                 {q.origin} → {q.destination}
               </td>
               <td className="px-4 py-3 text-right">
-                <div className="font-semibold text-red-600">
+                <div className="font-semibold text-brand-600">
                   {formatRMB(q.firstWeightPrice)}
                 </div>
                 <div className="text-xs text-gray-400">

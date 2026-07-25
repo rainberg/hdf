@@ -63,7 +63,7 @@ export default async function NewReviewPage({
       <nav className="mb-4 text-sm text-gray-500">
         <Link
           href={entityType === "COMPANY" ? `/companies/${entityId}` : `/phone-plans/${entityId}`}
-          className="hover:text-red-600"
+          className="hover:text-brand-600"
         >
           {entityName}
         </Link>

@@ -37,10 +37,10 @@ export function CompanyCard({ company }: CompanyCardProps) {
   return (
     <Link
       href={`/companies/${company.id}`}
-      className="group block rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:border-red-200 hover:shadow-md"
+      className="group block rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:border-brand-200 hover:shadow-md"
     >
       <div className="flex items-start gap-4">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-red-50 text-xl font-bold text-red-600">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-xl font-bold text-brand-600">
           {company.logo ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={company.logo} alt={company.name} className="h-full w-full rounded-lg object-cover" />
@@ -50,7 +50,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <h3 className="truncate text-base font-semibold text-gray-900 group-hover:text-red-600">
+            <h3 className="truncate text-base font-semibold text-gray-900 group-hover:text-brand-600">
               {company.name}
             </h3>
             {company.verified && (
@@ -74,7 +74,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
         {startingPrice !== undefined && (
           <div className="shrink-0 text-right">
             <div className="text-xs text-gray-400">起步价</div>
-            <div className="text-lg font-bold text-red-600">
+            <div className="text-lg font-bold text-brand-600">
               {formatRMB(startingPrice)}
             </div>
           </div>
@@ -83,7 +83,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {serviceTypes.map((t) => (
-          <Badge key={t} variant="red">
+          <Badge key={t} variant="brand">
             {serviceTypeLabels[t] ?? t}
           </Badge>
         ))}

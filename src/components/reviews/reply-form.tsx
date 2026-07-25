@@ -57,7 +57,7 @@ export function ReplyForm({ reviewId }: { reviewId: string }) {
         placeholder="以商家身份回复这条评价…"
         className="text-sm"
       />
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {error && <p className="text-xs text-brand-500">{error}</p>}
       <div className="flex justify-end">
         <Button type="submit" size="sm" disabled={submitting}>
           {submitting && <Loader2 size={14} className="animate-spin" />}

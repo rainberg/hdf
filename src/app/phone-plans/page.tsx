@@ -112,7 +112,7 @@ export default async function PhonePlansPage({
             name="q"
             defaultValue={sp.q ?? ""}
             placeholder="搜索运营商或套餐名…"
-            className="h-10 w-full rounded-md border border-gray-300 bg-white pl-9 pr-3 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+            className="h-10 w-full rounded-md border border-gray-300 bg-white pl-9 pr-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
         <Button type="submit">搜索</Button>
@@ -191,8 +191,8 @@ export default async function PhonePlansPage({
               className={cn(
                 "rounded-md px-2 py-1",
                 sort === "fee-asc"
-                  ? "text-red-600 font-medium"
-                  : "text-gray-600 hover:text-red-600",
+                  ? "text-brand-600 font-medium"
+                  : "text-gray-600 hover:text-brand-600",
               )}
             >
               价格低到高
@@ -202,8 +202,8 @@ export default async function PhonePlansPage({
               className={cn(
                 "rounded-md px-2 py-1",
                 sort === "fee-desc"
-                  ? "text-red-600 font-medium"
-                  : "text-gray-600 hover:text-red-600",
+                  ? "text-brand-600 font-medium"
+                  : "text-gray-600 hover:text-brand-600",
               )}
             >
               价格高到低
@@ -213,8 +213,8 @@ export default async function PhonePlansPage({
               className={cn(
                 "rounded-md px-2 py-1",
                 sort === "rating"
-                  ? "text-red-600 font-medium"
-                  : "text-gray-600 hover:text-red-600",
+                  ? "text-brand-600 font-medium"
+                  : "text-gray-600 hover:text-brand-600",
               )}
             >
               评分最高
@@ -249,7 +249,7 @@ export default async function PhonePlansPage({
                     className={cn(
                       "inline-flex h-9 min-w-9 items-center justify-center rounded-md px-3 text-sm",
                       n === page
-                        ? "bg-red-600 text-white"
+                        ? "bg-brand-600 text-white"
                         : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50",
                     )}
                   >
@@ -295,7 +295,7 @@ function FilterLink({
       className={cn(
         "rounded-md px-2 py-1 text-sm",
         active
-          ? "bg-red-50 font-medium text-red-600"
+          ? "bg-brand-50 font-medium text-brand-600"
           : "text-gray-700 hover:bg-gray-50",
       )}
     >
@@ -342,7 +342,7 @@ function PlanCard({
   return (
     <Link
       href={`/phone-plans/${plan.id}`}
-      className="group flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-red-200 hover:shadow-md"
+      className="group flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-brand-200 hover:shadow-md"
     >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
@@ -350,7 +350,7 @@ function PlanCard({
             {plan.type === "BROADBAND" ? <Wifi size={20} /> : <Smartphone size={20} />}
           </div>
           <div>
-            <div className="font-semibold text-gray-900 group-hover:text-red-600">
+            <div className="font-semibold text-gray-900 group-hover:text-brand-600">
               {plan.carrier}
             </div>
             <div className="text-xs text-gray-500">{plan.planName}</div>
@@ -367,11 +367,11 @@ function PlanCard({
               <div className="text-xs text-gray-400 line-through">
                 {formatEuro(plan.monthlyFee)}/月
               </div>
-              <div className="text-2xl font-bold text-red-600">
+              <div className="text-2xl font-bold text-brand-600">
                 {formatEuro(plan.promoPrice!)}
                 <span className="text-sm font-normal text-gray-500">/月</span>
               </div>
-              <div className="text-xs text-amber-600">
+              <div className="text-xs text-gold-600">
                 前 {plan.promoMonths} 个月，之后 {formatEuro(plan.restorePrice ?? plan.monthlyFee)}
               </div>
             </>
@@ -383,7 +383,7 @@ function PlanCard({
           )}
         </div>
         {hasPromo && (
-          <Badge variant="red" className="gap-1">
+          <Badge variant="brand" className="gap-1">
             <Flame size={10} />
             促销
           </Badge>

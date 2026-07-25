@@ -83,7 +83,7 @@ export function LoginForm({
               {...register("email")}
             />
             {errors.email && (
-              <p className="text-xs text-red-500">{errors.email.message}</p>
+              <p className="text-xs text-brand-500">{errors.email.message}</p>
             )}
           </div>
           <div className="space-y-1.5">
@@ -96,14 +96,14 @@ export function LoginForm({
               {...register("password")}
             />
             {errors.password && (
-              <p className="text-xs text-red-500">
+              <p className="text-xs text-brand-500">
                 {errors.password.message}
               </p>
             )}
           </div>
 
           {error && (
-            <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
+            <div className="rounded-md bg-brand-50 p-3 text-sm text-brand-600">
               {error}
             </div>
           )}
@@ -154,7 +154,7 @@ export function LoginForm({
           还没有账号？{" "}
           <Link
             href="/register"
-            className="font-medium text-red-600 hover:underline"
+            className="font-medium text-brand-600 hover:underline"
           >
             立即注册
           </Link>

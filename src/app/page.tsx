@@ -87,15 +87,15 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-red-50 via-white to-amber-50">
+      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-brand-50 via-white to-gold-50">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="red" className="mb-4 gap-1">
+            <Badge variant="brand" className="mb-4 gap-1">
               <Flame size={12} />
               在德华人专属
             </Badge>
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-              在德生活，<span className="text-red-600">一点就通</span>
+              在德生活，<span className="text-brand-600">一点就通</span>
             </h1>
             <p className="mt-4 text-lg text-gray-600">
               转运公司比价与点评 · 优惠码共享 · 电话套餐对比 ·
@@ -113,7 +113,7 @@ export default async function HomePage() {
                   type="search"
                   name="q"
                   placeholder="搜索公司 / 套餐 / 优惠码…"
-                  className="h-12 w-full rounded-full border border-gray-300 bg-white pl-11 pr-4 text-base shadow-sm focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                  className="h-12 w-full rounded-full border border-gray-300 bg-white pl-11 pr-4 text-base shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
                 />
               </div>
               <Button type="submit" size="lg" className="rounded-full">
@@ -125,21 +125,21 @@ export default async function HomePage() {
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm">
               <Link
                 href="/companies"
-                className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-gray-700 shadow-sm ring-1 ring-gray-200 hover:text-red-600"
+                className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-gray-700 shadow-sm ring-1 ring-gray-200 hover:text-brand-600"
               >
                 <Package size={14} />
                 转运公司
               </Link>
               <Link
                 href="/phone-plans"
-                className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-gray-700 shadow-sm ring-1 ring-gray-200 hover:text-red-600"
+                className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-gray-700 shadow-sm ring-1 ring-gray-200 hover:text-brand-600"
               >
                 <Smartphone size={14} />
                 电话套餐
               </Link>
               <Link
                 href="/codes"
-                className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-gray-700 shadow-sm ring-1 ring-gray-200 hover:text-red-600"
+                className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-gray-700 shadow-sm ring-1 ring-gray-200 hover:text-brand-600"
               >
                 <Ticket size={14} />
                 优惠码
@@ -156,13 +156,13 @@ export default async function HomePage() {
             icon={<Package size={20} />}
             label="收录转运公司"
             value={stats.companies}
-            color="text-red-600"
+            color="text-brand-600"
           />
           <StatCard
             icon={<Star size={20} />}
             label="真实用户评价"
             value={stats.reviews}
-            color="text-amber-500"
+            color="text-gold-500"
           />
           <StatCard
             icon={<Ticket size={20} />}
@@ -184,7 +184,7 @@ export default async function HomePage() {
         <section className="mb-12">
           <SectionHeader
             title="高分转运公司"
-            icon={<TrendingUp size={20} className="text-red-600" />}
+            icon={<TrendingUp size={20} className="text-brand-600" />}
             href="/companies"
           />
           {topCompanies.length === 0 ? (
@@ -195,10 +195,10 @@ export default async function HomePage() {
                 <Link
                   key={c.id}
                   href={`/companies/${c.id}`}
-                  className="group rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-red-200 hover:shadow-md"
+                  className="group rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-brand-200 hover:shadow-md"
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-gray-900 group-hover:text-red-600">
+                    <h3 className="font-semibold text-gray-900 group-hover:text-brand-600">
                       {c.name}
                     </h3>
                     {c.verified && (
@@ -341,7 +341,7 @@ export default async function HomePage() {
               icon={<TrendingUp size={24} />}
               title="数据透明"
               desc="所有报价、套餐价格公开对比，告别信息差，明明白白消费。"
-              color="bg-amber-50 text-amber-600"
+              color="bg-gold-50 text-gold-600"
             />
           </div>
         </div>
@@ -391,7 +391,7 @@ function SectionHeader({
       </h2>
       <Link
         href={href}
-        className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-red-600"
+        className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-brand-600"
       >
         查看全部
         <ArrowRight size={14} />

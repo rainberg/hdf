@@ -133,12 +133,12 @@ export default async function MePage() {
                     <div className="flex items-center justify-between gap-2">
                       <Link
                         href={targetHref}
-                        className="font-medium text-gray-900 hover:text-red-600"
+                        className="font-medium text-gray-900 hover:text-brand-600"
                       >
                         {targetName}
                       </Link>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-amber-500">
+                        <span className="text-sm font-medium text-gold-500">
                           {"★".repeat(filled)}
                           <span className="text-gray-300">
                             {"★".repeat(5 - filled)}
@@ -159,7 +159,7 @@ export default async function MePage() {
                             ? "bg-green-50 text-green-600"
                             : r.status === "PENDING"
                               ? "bg-amber-50 text-amber-600"
-                              : "bg-red-50 text-red-600"
+                              : "bg-brand-50 text-brand-600"
                         }`}
                       >
                         {r.status === "PUBLISHED"
@@ -225,7 +225,7 @@ export default async function MePage() {
                           ? "bg-green-50 text-green-600"
                           : c.status === "EXPIRED"
                             ? "bg-gray-100 text-gray-500"
-                            : "bg-red-50 text-red-600"
+                            : "bg-brand-50 text-brand-600"
                       }`}
                     >
                       {c.status === "ACTIVE"

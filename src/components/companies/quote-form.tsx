@@ -97,7 +97,7 @@ export function QuoteForm({ companyId, quote, onDone }: QuoteFormProps) {
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <Label htmlFor="channelName">
-            渠道名 <span className="text-red-500">*</span>
+            渠道名 <span className="text-brand-500">*</span>
           </Label>
           <Input
             id="channelName"
@@ -117,7 +117,7 @@ export function QuoteForm({ companyId, quote, onDone }: QuoteFormProps) {
             onChange={(e) =>
               setForm({ ...form, serviceType: e.target.value })
             }
-            className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+            className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           >
             {serviceTypeOptions.map((t) => (
               <option key={t.value} value={t.value}>
@@ -128,7 +128,7 @@ export function QuoteForm({ companyId, quote, onDone }: QuoteFormProps) {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="origin">
-            起运地 <span className="text-red-500">*</span>
+            起运地 <span className="text-brand-500">*</span>
           </Label>
           <Input
             id="origin"
@@ -140,7 +140,7 @@ export function QuoteForm({ companyId, quote, onDone }: QuoteFormProps) {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="destination">
-            目的地 <span className="text-red-500">*</span>
+            目的地 <span className="text-brand-500">*</span>
           </Label>
           <Input
             id="destination"
@@ -249,7 +249,7 @@ export function QuoteForm({ companyId, quote, onDone }: QuoteFormProps) {
       </div>
 
       {error && (
-        <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
+        <div className="rounded-md bg-brand-50 p-3 text-sm text-brand-600">
           {error}
         </div>
       )}

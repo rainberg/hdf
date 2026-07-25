@@ -107,7 +107,7 @@ export default async function CodesPage({
                 href={`/codes?${params.toString()}`}
                 className={`rounded-full px-3 py-1 text-sm transition-colors ${
                   (sp.category ?? "") === c.value
-                    ? "bg-red-600 text-white"
+                    ? "bg-brand-600 text-white"
                     : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
                 }`}
               >
@@ -122,7 +122,7 @@ export default async function CodesPage({
             name="q"
             defaultValue={sp.q ?? ""}
             placeholder="搜索平台或优惠…"
-            className="h-9 w-full rounded-md border border-gray-300 bg-white px-3 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:w-56"
+            className="h-9 w-full rounded-md border border-gray-300 bg-white px-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 sm:w-56"
           />
           <Button type="submit" size="sm">搜索</Button>
         </form>
@@ -133,13 +133,13 @@ export default async function CodesPage({
         <span className="text-gray-500">排序：</span>
         <Link
           href={`/codes?${new URLSearchParams({ ...sp, sort: "newest" } as Record<string, string>).toString()}`}
-          className={`rounded-md px-2 py-1 ${sort === "newest" ? "text-red-600 font-medium" : "text-gray-600 hover:text-red-600"}`}
+          className={`rounded-md px-2 py-1 ${sort === "newest" ? "text-brand-600 font-medium" : "text-gray-600 hover:text-brand-600"}`}
         >
           最新
         </Link>
         <Link
           href={`/codes?${new URLSearchParams({ ...sp, sort: "hot" } as Record<string, string>).toString()}`}
-          className={`rounded-md px-2 py-1 ${sort === "hot" ? "text-red-600 font-medium" : "text-gray-600 hover:text-red-600"}`}
+          className={`rounded-md px-2 py-1 ${sort === "hot" ? "text-brand-600 font-medium" : "text-gray-600 hover:text-brand-600"}`}
         >
           最热
         </Link>
@@ -177,7 +177,7 @@ export default async function CodesPage({
                 href={`/codes?${params.toString()}`}
                 className={`inline-flex h-9 min-w-9 items-center justify-center rounded-md px-3 text-sm ${
                   n === page
-                    ? "bg-red-600 text-white"
+                    ? "bg-brand-600 text-white"
                     : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
                 }`}
               >

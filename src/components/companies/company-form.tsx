@@ -143,7 +143,7 @@ export function CompanyForm({ mode, companyId, initial }: CompanyFormProps) {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-1.5">
             <Label htmlFor="name">
-              公司名 <span className="text-red-500">*</span>
+              公司名 <span className="text-brand-500">*</span>
             </Label>
             <Input
               id="name"
@@ -244,7 +244,7 @@ export function CompanyForm({ mode, companyId, initial }: CompanyFormProps) {
 
         <div className="mb-4">
           <Label className="mb-2 block">
-            服务类型 <span className="text-red-500">*</span>
+            服务类型 <span className="text-brand-500">*</span>
           </Label>
           <div className="flex flex-wrap gap-2">
             {serviceTypeOptions.map((t) => (
@@ -254,7 +254,7 @@ export function CompanyForm({ mode, companyId, initial }: CompanyFormProps) {
                 onClick={() => toggle(serviceTypes, t.value, setServiceTypes)}
                 className={`rounded-md border px-3 py-1.5 text-sm transition-colors ${
                   serviceTypes.includes(t.value)
-                    ? "border-red-500 bg-red-50 text-red-600"
+                    ? "border-brand-500 bg-brand-50 text-brand-600"
                     : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
                 }`}
               >
@@ -266,7 +266,7 @@ export function CompanyForm({ mode, companyId, initial }: CompanyFormProps) {
 
         <div className="mb-4">
           <Label className="mb-2 block">
-            起运地 <span className="text-red-500">*</span>
+            起运地 <span className="text-brand-500">*</span>
           </Label>
           <div className="flex flex-wrap gap-2">
             {commonOrigins.map((o) => (
@@ -276,7 +276,7 @@ export function CompanyForm({ mode, companyId, initial }: CompanyFormProps) {
                 onClick={() => toggle(origins, o, setOrigins)}
                 className={`rounded-md border px-3 py-1.5 text-sm transition-colors ${
                   origins.includes(o)
-                    ? "border-red-500 bg-red-50 text-red-600"
+                    ? "border-brand-500 bg-brand-50 text-brand-600"
                     : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
                 }`}
               >
@@ -309,7 +309,7 @@ export function CompanyForm({ mode, companyId, initial }: CompanyFormProps) {
 
         <div>
           <Label className="mb-2 block">
-            目的地 <span className="text-red-500">*</span>
+            目的地 <span className="text-brand-500">*</span>
           </Label>
           <div className="flex flex-wrap gap-2">
             {commonDestinations.map((d) => (
@@ -319,7 +319,7 @@ export function CompanyForm({ mode, companyId, initial }: CompanyFormProps) {
                 onClick={() => toggle(destinations, d, setDestinations)}
                 className={`rounded-md border px-3 py-1.5 text-sm transition-colors ${
                   destinations.includes(d)
-                    ? "border-red-500 bg-red-50 text-red-600"
+                    ? "border-brand-500 bg-brand-50 text-brand-600"
                     : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
                 }`}
               >
@@ -352,7 +352,7 @@ export function CompanyForm({ mode, companyId, initial }: CompanyFormProps) {
       </div>
 
       {error && (
-        <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
+        <div className="rounded-md bg-brand-50 p-3 text-sm text-brand-600">
           {error}
         </div>
       )}

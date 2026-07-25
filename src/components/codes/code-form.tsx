@@ -105,7 +105,7 @@ export function CodeForm() {
               className={cn(
                 "rounded-full px-4 py-1.5 text-sm transition-colors",
                 type === t.value
-                  ? "bg-red-600 text-white"
+                  ? "bg-brand-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200",
               )}
             >
@@ -118,7 +118,7 @@ export function CodeForm() {
       {/* 平台 + 分类 */}
       <div className="rounded-xl border border-gray-200 bg-white p-5">
         <Label className="mb-2 block">
-          适用平台 <span className="text-red-500">*</span>
+          适用平台 <span className="text-brand-500">*</span>
         </Label>
         <Input
           {...register("platform")}
@@ -131,7 +131,7 @@ export function CodeForm() {
           ))}
         </datalist>
         {errors.platform && (
-          <p className="mt-1 text-xs text-red-500">{errors.platform.message}</p>
+          <p className="mt-1 text-xs text-brand-500">{errors.platform.message}</p>
         )}
 
         <Label className="mb-2 mt-4 block">分类</Label>
@@ -146,7 +146,7 @@ export function CodeForm() {
               className={cn(
                 "rounded-full px-3 py-1 text-sm transition-colors",
                 category === c.value
-                  ? "bg-red-600 text-white"
+                  ? "bg-brand-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200",
               )}
             >
@@ -159,7 +159,7 @@ export function CodeForm() {
       {/* 优惠内容 */}
       <div className="rounded-xl border border-gray-200 bg-white p-5">
         <Label className="mb-2 block">
-          优惠内容 <span className="text-red-500">*</span>
+          优惠内容 <span className="text-brand-500">*</span>
         </Label>
         <Textarea
           {...register("benefitDescription")}
@@ -167,7 +167,7 @@ export function CodeForm() {
           rows={2}
         />
         {errors.benefitDescription && (
-          <p className="mt-1 text-xs text-red-500">
+          <p className="mt-1 text-xs text-brand-500">
             {errors.benefitDescription.message}
           </p>
         )}
@@ -214,7 +214,7 @@ export function CodeForm() {
             type="checkbox"
             checked={hasReferral}
             onChange={(e) => setValue("hasReferral", e.target.checked)}
-            className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+            className="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
           />
           此码/链接含返利（点击购买后我会获得佣金）
         </label>
@@ -224,7 +224,7 @@ export function CodeForm() {
       </div>
 
       {error && (
-        <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
+        <div className="rounded-md bg-brand-50 p-3 text-sm text-brand-600">
           {error}
         </div>
       )}

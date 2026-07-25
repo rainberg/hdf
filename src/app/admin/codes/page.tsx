@@ -83,11 +83,11 @@ export default async function AdminCodesPage({
           name="q"
           defaultValue={q ?? ""}
           placeholder="搜索平台、优惠内容或码值"
-          className="h-9 flex-1 rounded-md border border-gray-300 bg-white px-3 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+          className="h-9 flex-1 rounded-md border border-gray-300 bg-white px-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
         />
         <button
           type="submit"
-          className="rounded-md bg-red-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-red-700"
+          className="rounded-md bg-brand-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-brand-700"
         >
           搜索
         </button>
@@ -101,7 +101,7 @@ export default async function AdminCodesPage({
             href={`/admin/codes?status=${t.value}${q ? `&q=${encodeURIComponent(q)}` : ""}`}
             className={`flex-1 rounded-md px-3 py-1.5 text-center text-sm transition-colors ${
               status === t.value
-                ? "bg-red-600 text-white"
+                ? "bg-brand-600 text-white"
                 : "text-gray-600 hover:bg-gray-50"
             }`}
           >
@@ -155,7 +155,7 @@ export default async function AdminCodesPage({
                               : "已删除"}
                         </Badge>
                         {flagged && (
-                          <Badge variant="red">用户举报过多</Badge>
+                          <Badge variant="brand">用户举报过多</Badge>
                         )}
                         {c.hasReferral && (
                           <Badge variant="amber">含返利</Badge>
@@ -178,7 +178,7 @@ export default async function AdminCodesPage({
                           <span className="text-gray-400">投票：</span>
                           👍 {c.upvotes} / 👎 {c.downvotes}
                           {downvoteRate > 0 && (
-                            <span className="ml-1 text-amber-600">
+                            <span className="ml-1 text-gold-600">
                               (失效率 {Math.round(downvoteRate * 100)}%)
                             </span>
                           )}

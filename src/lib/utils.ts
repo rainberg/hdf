@@ -71,9 +71,9 @@ export function creditLevel(score: number): {
   color: string;
 } {
   if (score >= 81)
-    return { label: "资深", weight: 2.0, color: "text-amber-600" };
+    return { label: "资深", weight: 2.0, color: "text-gold-600" };
   if (score >= 51)
-    return { label: "活跃", weight: 1.5, color: "text-blue-600" };
+    return { label: "活跃", weight: 1.5, color: "text-brand-600" };
   if (score >= 21)
     return { label: "普通", weight: 1.0, color: "text-gray-600" };
   return { label: "新人", weight: 0.5, color: "text-gray-400" };

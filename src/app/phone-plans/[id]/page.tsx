@@ -117,7 +117,7 @@ export default async function PhonePlanDetailPage({ params }: Params) {
       />
       {/* 面包屑 */}
       <nav className="mb-4 text-sm text-gray-500">
-        <Link href="/phone-plans" className="hover:text-red-600">
+        <Link href="/phone-plans" className="hover:text-brand-600">
           电话套餐
         </Link>
         <span className="mx-2">/</span>
@@ -143,7 +143,7 @@ export default async function PhonePlanDetailPage({ params }: Params) {
               </h1>
               <Badge variant="outline">{typeLabels[plan.type] ?? plan.type}</Badge>
               {hasPromo && (
-                <Badge variant="red" className="gap-1">
+                <Badge variant="brand" className="gap-1">
                   <Flame size={10} />
                   促销中
                 </Badge>
@@ -156,7 +156,7 @@ export default async function PhonePlanDetailPage({ params }: Params) {
                   ({plan.reviewCount} 条评价)
                 </span>
                 {sampleInsufficient && plan.reviewCount > 0 && (
-                  <span className="text-xs text-amber-600">样本不足</span>
+                  <span className="text-xs text-gold-600">样本不足</span>
                 )}
               </div>
             </div>
@@ -230,11 +230,11 @@ export default async function PhonePlanDetailPage({ params }: Params) {
                 <div className="text-xs text-gray-400 line-through">
                   {formatEuro(plan.monthlyFee)}/月
                 </div>
-                <div className="text-2xl font-bold text-red-600">
+                <div className="text-2xl font-bold text-brand-600">
                   {formatEuro(plan.promoPrice!)}
                   <span className="text-sm font-normal text-gray-500">/月</span>
                 </div>
-                <div className="text-xs text-amber-600">
+                <div className="text-xs text-gold-600">
                   前 {plan.promoMonths} 个月，之后{" "}
                   {formatEuro(plan.restorePrice ?? plan.monthlyFee)}
                 </div>
@@ -283,7 +283,7 @@ export default async function PhonePlanDetailPage({ params }: Params) {
       </section>
 
       {/* 提示 */}
-      <div className="mt-8 flex items-start gap-2 rounded-lg bg-amber-50 p-4 text-xs text-amber-700">
+      <div className="mt-8 flex items-start gap-2 rounded-lg bg-gold-50 p-4 text-xs text-gold-700">
         <AlertTriangle size={16} className="mt-0.5 shrink-0" />
         <p>
           套餐信息（价格、流量、合约期等）仅供参考，最终以运营商官网为准。本平台不承担任何签约纠纷责任。

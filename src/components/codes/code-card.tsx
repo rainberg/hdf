@@ -111,7 +111,7 @@ export function CodeCard({ code }: CodeCardProps) {
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="red">{typeLabels[code.type] ?? code.type}</Badge>
+            <Badge variant="brand">{typeLabels[code.type] ?? code.type}</Badge>
             <Badge variant="outline">
               {categoryLabels[code.platformCategory] ?? code.platformCategory}
             </Badge>
@@ -197,7 +197,7 @@ export function CodeCard({ code }: CodeCardProps) {
             onClick={() => vote(-1)}
             className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-colors ${
               voteState === "down"
-                ? "bg-red-100 text-red-700"
+                ? "bg-brand-100 text-brand-700"
                 : "text-gray-500 hover:bg-gray-100"
             }`}
           >

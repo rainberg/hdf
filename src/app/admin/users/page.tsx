@@ -79,11 +79,11 @@ export default async function AdminUsersPage({
           name="q"
           defaultValue={q ?? ""}
           placeholder="搜索邮箱或昵称"
-          className="h-9 flex-1 rounded-md border border-gray-300 bg-white px-3 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+          className="h-9 flex-1 rounded-md border border-gray-300 bg-white px-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
         />
         <button
           type="submit"
-          className="rounded-md bg-red-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-red-700"
+          className="rounded-md bg-brand-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-brand-700"
         >
           搜索
         </button>
@@ -97,7 +97,7 @@ export default async function AdminUsersPage({
             href={`/admin/users?role=${t.value}${q ? `&q=${encodeURIComponent(q)}` : ""}`}
             className={`flex-1 rounded-md px-3 py-1.5 text-center text-sm transition-colors ${
               role === t.value
-                ? "bg-red-600 text-white"
+                ? "bg-brand-600 text-white"
                 : "text-gray-600 hover:bg-gray-50"
             }`}
           >
@@ -128,9 +128,9 @@ export default async function AdminUsersPage({
                         <Badge
                           variant={
                             u.role === "ADMIN"
-                              ? "red"
+                              ? "brand"
                               : u.role === "MERCHANT"
-                                ? "red"
+                                ? "brand"
                                 : "outline"
                           }
                         >

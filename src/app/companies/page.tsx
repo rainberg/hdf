@@ -90,7 +90,7 @@ export default async function CompaniesPage({
             name="q"
             defaultValue={sp.q ?? ""}
             placeholder="搜索公司名或关键词…"
-            className="h-10 w-full rounded-md border border-gray-300 bg-white pl-9 pr-3 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+            className="h-10 w-full rounded-md border border-gray-300 bg-white pl-9 pr-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
         <Button type="submit">搜索</Button>
@@ -131,7 +131,7 @@ export default async function CompaniesPage({
                     href={`/companies?${params.toString()}`}
                     className={`inline-flex h-9 min-w-9 items-center justify-center rounded-md px-3 text-sm ${
                       n === page
-                        ? "bg-red-600 text-white"
+                        ? "bg-brand-600 text-white"
                         : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
                     }`}
                   >

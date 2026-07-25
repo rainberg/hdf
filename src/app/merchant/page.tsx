@@ -68,7 +68,7 @@ export default async function MerchantDashboard() {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-bold text-gray-900">
-            <Store className="text-red-600" size={24} />
+            <Store className="text-brand-600" size={24} />
             商家中心
           </h1>
           <p className="mt-1 text-sm text-gray-500">
@@ -124,7 +124,7 @@ export default async function MerchantDashboard() {
               <MessageSquare size={14} />
               待回复评价
             </div>
-            <div className="mt-2 text-2xl font-bold text-amber-600">
+            <div className="mt-2 text-2xl font-bold text-gold-600">
               {pendingReviews.length}
             </div>
           </CardContent>
@@ -169,7 +169,7 @@ export default async function MerchantDashboard() {
                       <div className="flex items-center gap-2">
                         <Link
                           href={`/companies/${c.id}`}
-                          className="font-semibold text-gray-900 hover:text-red-600"
+                          className="font-semibold text-gray-900 hover:text-brand-600"
                         >
                           {c.name}
                         </Link>
@@ -195,7 +195,7 @@ export default async function MerchantDashboard() {
                       </div>
                       <div className="mt-2 flex flex-wrap gap-1">
                         {serviceTypes.map((t) => (
-                          <Badge key={t} variant="red">
+                          <Badge key={t} variant="brand">
                             {typeLabels[t] ?? t}
                           </Badge>
                         ))}
@@ -231,7 +231,7 @@ export default async function MerchantDashboard() {
                     <div className="flex items-center gap-2">
                       <Link
                         href={`/companies/${r.company?.id ?? ""}`}
-                        className="font-medium text-gray-900 hover:text-red-600"
+                        className="font-medium text-gray-900 hover:text-brand-600"
                       >
                         {r.company?.name ?? "未知公司"}
                       </Link>

@@ -107,12 +107,12 @@ export default async function SearchPage({
             defaultValue={q}
             autoFocus
             placeholder="搜索公司 / 套餐 / 优惠码…"
-            className="h-12 w-full rounded-md border border-gray-300 bg-white pl-11 pr-3 text-base focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+            className="h-12 w-full rounded-md border border-gray-300 bg-white pl-11 pr-3 text-base focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
         <button
           type="submit"
-          className="inline-flex h-12 items-center justify-center rounded-md bg-red-600 px-6 text-sm font-medium text-white hover:bg-red-700"
+          className="inline-flex h-12 items-center justify-center rounded-md bg-brand-600 px-6 text-sm font-medium text-white hover:bg-brand-700"
         >
           搜索
         </button>
@@ -120,7 +120,7 @@ export default async function SearchPage({
 
       <Link
         href="/"
-        className="mb-6 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-red-600"
+        className="mb-6 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-brand-600"
       >
         <ArrowLeft size={14} />
         返回首页
@@ -144,7 +144,7 @@ export default async function SearchPage({
       {hasQuery && (companies as unknown[]).length > 0 && (
         <section className="mb-8">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-900">
-            <Package size={18} className="text-red-600" />
+            <Package size={18} className="text-brand-600" />
             转运公司
             <Badge variant="outline">{(companies as unknown[]).length}</Badge>
           </h2>
@@ -160,7 +160,7 @@ export default async function SearchPage({
               <Link
                 key={c.id}
                 href={`/companies/${c.id}`}
-                className="block rounded-lg border border-gray-200 bg-white p-4 hover:border-red-200 hover:bg-red-50/30"
+                className="block rounded-lg border border-gray-200 bg-white p-4 hover:border-brand-200 hover:bg-brand-50/30"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-gray-900">{c.name}</span>
@@ -292,15 +292,15 @@ export default async function SearchPage({
           <p className="text-gray-500">没有找到相关结果</p>
           <p className="mt-1 text-sm text-gray-400">
             试试其他关键词，或直接浏览{' '}
-            <Link href="/companies" className="text-red-600 hover:underline">
+            <Link href="/companies" className="text-brand-600 hover:underline">
               转运公司
             </Link>
             、
-            <Link href="/phone-plans" className="text-red-600 hover:underline">
+            <Link href="/phone-plans" className="text-brand-600 hover:underline">
               电话套餐
             </Link>
             、
-            <Link href="/codes" className="text-red-600 hover:underline">
+            <Link href="/codes" className="text-brand-600 hover:underline">
               优惠码
             </Link>
           </p>

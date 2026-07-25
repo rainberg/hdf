@@ -16,7 +16,7 @@ export async function Navbar() {
     <header className="sticky top-0 z-40 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-red-600">华德福</span>
+          <span className="text-xl font-bold text-brand-600">华德福</span>
           <span className="hidden text-xs text-gray-500 sm:inline">
             在德华人生活指南
           </span>
@@ -27,7 +27,7 @@ export async function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-red-600"
+              className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-brand-600"
             >
               {link.label}
             </Link>

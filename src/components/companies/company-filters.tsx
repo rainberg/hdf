@@ -52,7 +52,7 @@ export function CompanyFilters() {
               className={cn(
                 "rounded-full px-3 py-1 text-sm transition-colors",
                 currentServiceType === t.value
-                  ? "bg-red-600 text-white"
+                  ? "bg-brand-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200",
               )}
             >
@@ -72,7 +72,7 @@ export function CompanyFilters() {
               className={cn(
                 "rounded-full px-3 py-1 text-sm transition-colors",
                 currentSort === s.value
-                  ? "bg-red-600 text-white"
+                  ? "bg-brand-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200",
               )}
             >
@@ -88,7 +88,7 @@ export function CompanyFilters() {
             type="checkbox"
             checked={verifiedOnly}
             onChange={(e) => updateParam("verified", e.target.checked ? "true" : "")}
-            className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+            className="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
           />
           仅看官方认证
         </label>

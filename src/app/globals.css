@@ -1,16 +1,65 @@
 @import "tailwindcss";
 
+/* ============================================
+   华德福 设计系统 - 柏林深蓝 + 琥珀金
+   Berlin Midnight + Amber Gold
+   ============================================ */
+
 :root {
-  --background: #f9fafb;
-  --foreground: #111827;
+  --background: #f7f8fa;
+  --foreground: #0f2036;
+
+  /* 品牌主色：柏林深蓝（替代原红色 #dc2626）*/
+  --color-brand-50: #eef3f9;
+  --color-brand-100: #d4e0ef;
+  --color-brand-200: #a9c1df;
+  --color-brand-300: #7e9cc8;
+  --color-brand-400: #4f72a0;
+  --color-brand-500: #2d5283;
+  --color-brand-600: #1b3a5b; /* 主色 */
+  --color-brand-700: #142d47;
+  --color-brand-800: #0f2036;
+  --color-brand-900: #0a1526;
+
+  /* 强调色：琥珀金（用于价格、星级、品牌强调）*/
+  --color-gold-50: #fbf7ec;
+  --color-gold-100: #f5ecc9;
+  --color-gold-200: #ebd88e;
+  --color-gold-300: #e0c45a;
+  --color-gold-400: #d4a547; /* 强调主色 */
+  --color-gold-500: #b88830;
+  --color-gold-600: #8c6620;
+  --color-gold-700: #664817;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --color-brand-50: var(--color-brand-50);
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-200: var(--color-brand-200);
+  --color-brand-300: var(--color-brand-300);
+  --color-brand-400: var(--color-brand-400);
+  --color-brand-500: var(--color-brand-500);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-700: var(--color-brand-700);
+  --color-brand-800: var(--color-brand-800);
+  --color-brand-900: var(--color-brand-900);
+  --color-gold-50: var(--color-gold-50);
+  --color-gold-100: var(--color-gold-100);
+  --color-gold-200: var(--color-gold-200);
+  --color-gold-300: var(--color-gold-300);
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-600: var(--color-gold-600);
+  --color-gold-700: var(--color-gold-700);
+
+  /* 字体：Fraunces 衬线（标题/数字）+ Manrope 无衬线（UI/正文）*/
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system,
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  --font-display: var(--font-fraunces), "PingFang SC", "Songti SC", Georgia,
+    "Times New Roman", serif;
 }
 
 html {
@@ -23,27 +72,49 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
 }
 
-/* 自定义滚动条 */
+/* 标题用 Fraunces 衬线，增加 editorial 质感 */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* 数字用 tabular nums，价格/统计更整齐 */
+.tabular-nums,
+code {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 自定义滚动条 - 深蓝主题 */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--color-brand-50);
 }
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
+  background: var(--color-brand-300);
+  border-radius: 5px;
+  border: 2px solid var(--color-brand-50);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: var(--color-brand-500);
+}
+
+/* 文本选区 - 琥珀金高亮 */
+::selection {
+  background: var(--color-gold-200);
+  color: var(--color-brand-900);
 }
 
 /* prose 简易排版（评价内容） */
 .prose-review {
   white-space: pre-wrap;
   word-break: break-word;
-  line-height: 1.7;
+  line-height: 1.75;
 }

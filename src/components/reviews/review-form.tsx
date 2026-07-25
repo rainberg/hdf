@@ -108,7 +108,7 @@ export function ReviewForm({ entityType, entityId, entityName }: ReviewFormProps
       {/* 总体评分 */}
       <div className="rounded-xl border border-gray-200 bg-white p-5">
         <Label className="mb-3 block">
-          总体评分 <span className="text-red-500">*</span>
+          总体评分 <span className="text-brand-500">*</span>
         </Label>
         <StarInput
           value={overall}
@@ -116,7 +116,7 @@ export function ReviewForm({ entityType, entityId, entityName }: ReviewFormProps
           size={32}
         />
         {errors.overallRating && (
-          <p className="mt-2 text-xs text-red-500">
+          <p className="mt-2 text-xs text-brand-500">
             {errors.overallRating.message}
           </p>
         )}
@@ -125,7 +125,7 @@ export function ReviewForm({ entityType, entityId, entityName }: ReviewFormProps
             type="checkbox"
             checked={recommend}
             onChange={(e) => setValue("recommend", e.target.checked)}
-            className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+            className="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
           />
           推荐这家{entityType === "COMPANY" ? "公司" : "套餐"}
         </label>
@@ -153,7 +153,7 @@ export function ReviewForm({ entityType, entityId, entityName }: ReviewFormProps
       {/* 评价内容 */}
       <div className="rounded-xl border border-gray-200 bg-white p-5">
         <Label className="mb-2 block">
-          评价内容 <span className="text-red-500">*</span>
+          评价内容 <span className="text-brand-500">*</span>
         </Label>
         <Textarea
           {...register("content")}
@@ -161,7 +161,7 @@ export function ReviewForm({ entityType, entityId, entityName }: ReviewFormProps
           rows={6}
         />
         {errors.content && (
-          <p className="mt-1 text-xs text-red-500">{errors.content.message}</p>
+          <p className="mt-1 text-xs text-brand-500">{errors.content.message}</p>
         )}
       </div>
 
@@ -192,7 +192,7 @@ export function ReviewForm({ entityType, entityId, entityName }: ReviewFormProps
       </div>
 
       {error && (
-        <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
+        <div className="rounded-md bg-brand-50 p-3 text-sm text-brand-600">
           {error}
         </div>
       )}
