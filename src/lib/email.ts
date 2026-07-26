@@ -88,11 +88,11 @@ export async function sendPasswordResetEmail(
     subject: "重置你的华德福账号密码",
     html: `
       <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto;">
-        <h2 style="color: #1b3a5b;">重置密码</h2>
+        <h2 style="color: #9a1f1f;">重置密码</h2>
         <p>你收到这封邮件是因为有人请求重置华德福账号的密码。</p>
         <p>
           <a href="${resetUrl}"
-             style="display: inline-block; background: #1b3a5b; color: #fff;
+             style="display: inline-block; background: #9a1f1f; color: #fff;
                     padding: 10px 20px; border-radius: 6px; text-decoration: none;
                     margin: 16px 0;">
             点击重置密码
@@ -126,11 +126,11 @@ export async function sendEmailVerification(
     subject: "验证你的华德福账号邮箱",
     html: `
       <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto;">
-        <h2 style="color: #1b3a5b;">验证邮箱</h2>
+        <h2 style="color: #9a1f1f;">验证邮箱</h2>
         <p>欢迎加入华德福！请点击下方按钮验证你的邮箱地址。</p>
         <p>
           <a href="${verifyUrl}"
-             style="display: inline-block; background: #d4a547; color: #1b3a5b;
+             style="display: inline-block; background: #d4a547; color: #9a1f1f;
                     padding: 10px 20px; border-radius: 6px; text-decoration: none;
                     font-weight: 600; margin: 16px 0;">
             验证邮箱

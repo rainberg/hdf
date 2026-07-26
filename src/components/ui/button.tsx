@@ -17,7 +17,7 @@ const buttonVariants = cva(
         link: "text-brand-600 underline-offset-4 hover:underline",
         gold: "bg-gold-400 text-brand-900 shadow-sm hover:bg-gold-300 hover:shadow",
         danger:
-          "bg-red-600 text-white shadow-sm hover:bg-red-700",
+          "bg-stone-700 text-white shadow-sm hover:bg-stone-800",
       },
       size: {
         sm: "h-8 px-3",
